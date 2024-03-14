@@ -3,10 +3,13 @@
 
 #include "EstructuraGrafo24.h"
 
-//Crear vertice
-Vertex create_vertex(u32);
+// Cantidad de vecinos de un vertice
+u32 number_neighbors(Vertex v);
 
-// Agregar los vertices
+// Liberar memoria del vertice
+Vertex destroy_vertex(Grafo graph,u32 i);
+
+// Agregar los vertices al grafo
 Grafo add_vertex(Grafo graph,u32 v);
 
 #endif

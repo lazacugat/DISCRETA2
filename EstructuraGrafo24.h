@@ -10,22 +10,13 @@ typedef struct GrafoSt *Grafo;
 
 typedef struct VertexSt *Vertex;
 
-typedef struct NeighborsSt *Neighbors;
-
-// Estructura para poder ver los vecinos de un vertice
-struct NeighborSt{
-    u32 neighborid;
-    color colorV;
-    Neighbors *next;
-};
-
 // Estructura para representar la informacion sobre un vertice
 struct VertexSt{
     u32 idV;
     u32 gradeV;
     color colorV;
     u32 cantN;
-    Neighbors *neighbors;
+    Vertex *neighbors;
 };
 
 // Estructura para representar la informacion sobre el grafo 

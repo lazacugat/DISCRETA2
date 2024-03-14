@@ -4,9 +4,44 @@
 #include "funcgraph.h"
 #include "funcvertex.h"
 
+// Numero maximo de caracteres por linea del standar input que pretendemos leer
 #define MAX_CHARS_PER_LINE 100
 
+u32 NumeroDeVertices(Grafo G){
+    assert(G != NULL);
+    return G->number_V;
+}
 
+u32 NumeroDeLados(Grafo G){
+    assert(G != NULL);
+    return G->number_E;
+}
+
+u32 Delta(Grafo G){
+    assert(G != NULL);
+    return G->delta;
+}
+
+Grafo add_vertex(Grafo graph,u32 v){
+
+    u32 cant_V = NumeroDeLados(graph);
+
+    // Buscamos si el vertice ya pertenece al grafico, de ser asi no hacemos nada
+    for (int i = 0; i < cant_V; i++)
+    {
+        if (graph->vertex[i]->idV == v)
+        {
+            return graph;
+        }
+    }
+
+    // Si el vertice no pertenecia al grafo, lo creamos y lo agregamos
+    Vertex v_aux = create_vertex(v);
+    graph->vertex[graph->number_V] = v_aux;
+    graph->number_V ++;
+    
+    return graph;
+}
 
 Grafo ConstruirGrafo(){
     char line[MAX_CHARS_PER_LINE];
@@ -53,7 +88,7 @@ Grafo ConstruirGrafo(){
         printf("Error allocating memory to the graph");
         return NULL;
     }
-    graph->number_E = cant_E;
+    graph->number_E = 0;
     graph->delta = 0;
     graph->vertex = malloc(cant_V * sizeof(struct VertexSt));
     if (graph->vertex == NULL)
@@ -63,9 +98,9 @@ Grafo ConstruirGrafo(){
         return NULL;
     }
 
-    for (int i = 0; i < cant_E; i++)
+    for (u32 i = 0; i < cant_E; i++)
     {
-        if (fgets(line, MAX_CHARS_PER_LINE,stdin) == NULL || sscanf(line, "e %d %d", &V1, &V2) != 2)
+        if (fgets(line, MAX_CHARS_PER_LINE,stdin) == NULL || sscanf(line, "e %u %u", &V1, &V2) != 2)
         {
             printf("Error in input structure");
             return NULL;
@@ -73,21 +108,19 @@ Grafo ConstruirGrafo(){
        // Asignamos datos de los vertices
         graph->vertex = add_vertex(graph,V1);
         graph->vertex = add_vertex(graph,V2);
+        graph->vertex = add_neighboor(graph,V1,V2);
     }
 
 }
 
-u32 NumeroDeVertices(Grafo G){
-    assert(G != NULL);
-    return G->number_V;
-}
 
-u32 NumeroDeLados(Grafo G){
-    assert(G != NULL);
-    return G->number_E;
-}
 
-u32 Delta(Grafo G){
-    assert(G != NULL);
-    return G->delta;
+void DestruirGrafo(Grafo G){
+    u32 cant_V = NumeroDeVertices(G);
+    for (u32 i = 0; i < cant_V; i++)
+    {
+        G->vertex[i] = destroy_vertex(G,i);
+    }
+    free(G->vertex);
+    free(G);
 }

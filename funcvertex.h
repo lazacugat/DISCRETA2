@@ -6,10 +6,7 @@
 // Cantidad de vecinos de un vertice
 u32 number_neighbors(Vertex v);
 
-// Liberar memoria del vertice
-Vertex destroy_vertex(Grafo graph,u32 i);
-
-// Agregar los vertices al grafo
-Grafo add_vertex(Grafo graph,u32 v);
+// Agrega un vecinos a un vertice
+Grafo add_neighbors(Grafo graph,u32 V1_id,u32 V2_id);
 
 #endif

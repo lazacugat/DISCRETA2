@@ -1,3 +1,6 @@
+#ifndef ESTRUCTURAGRAFO24_H  
+#define ESTRUCTURAGRAFO24_H  
+
 #include <stdint.h> // Para usar uint32_t
 #include <stdbool.h>
 
@@ -13,10 +16,10 @@ typedef struct VertexSt *Vertex;
 // Estructura para representar la informacion sobre un vertice
 struct VertexSt{
     u32 idV;
-    u32 gradeV;
     color colorV;
     u32 cantN;
     Vertex *neighbors;
+    bool used;
 };
 
 // Estructura para representar la informacion sobre el grafo 
@@ -26,3 +29,5 @@ struct GrafoSt{
     u32 delta;
     Vertex *vertex;
 };
+
+#endif

@@ -1,31 +1,31 @@
 #ifndef ESTRUCTURAGRAFO24_H  
 #define ESTRUCTURAGRAFO24_H  
 
-#include <stdint.h> // Para usar uint32_t
+#include <stdint.h> // To use uint32_t
 #include <stdbool.h>
+#include "APIG24.h"
 
 typedef uint32_t u32;
 
-// Definimos el tipo de dato color como un alias de u32
+// Define the color data type as an alias of u32
 typedef u32 color;
 
-typedef struct GrafoSt *Grafo;
-
+// Define the vertex data type as a pointer to a structure
 typedef struct VertexSt *Vertex;
 
-// Estructura para representar la informacion sobre un vertice
+// Structure to represent information about a vertex
 struct VertexSt{
-    u32 idV;
-    color colorV;
-    u32 cantN;
+    u32 id;
+    color color;
+    u32 num_neighbors;
     Vertex *neighbors;
     bool used;
 };
 
-// Estructura para representar la informacion sobre el grafo 
+// Structure to represent information about the graph
 struct GrafoSt{
-    u32 number_V;
-    u32 number_E;
+    u32 num_vertices;
+    u32 num_edges;
     u32 delta;
     Vertex *vertex;
 };

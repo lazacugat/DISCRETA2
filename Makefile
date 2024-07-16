@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS =  -Wall -Wextra -O3 -std=c99
-SOURCES = funcvertex.c funcgraph.c main.c
+CFLAGS = -Wall -Wextra -O3 -std=c99 -g
+SOURCES = vertex_functions.c graph_functions.c main.c
 OBJECTS = $(SOURCES:.c=.o)
-TARGET = mi_programa
+TARGET = main
 
 .PHONY: clean
 
